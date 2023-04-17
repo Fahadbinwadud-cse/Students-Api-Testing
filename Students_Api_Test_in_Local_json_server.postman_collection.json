@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "d98b0d15-4c51-4d91-86a5-b86053581f3a",
+		"name": "Students_Api_Test_in_Local_json_server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25441664"
+	},
+	"item": [
+		{
+			"name": "Get students info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// These all are Testing Status code\r",
+							"pm.test(\"Status code is 200\",()=>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\",()=>{\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200 || 201]);\r",
+							"});\r",
+							"// These all are Testing Header items\r",
+							"pm.test(\"Content-Type Header is present\",()=>{\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length is present\",()=>{\r",
+							"    pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							"\r",
+							"/* Test the type of any type of the response \r",
+							"it's check only single object data not multiple object. */\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Test data type of the response\",()=>{\r",
+							"    pm.expect(jsonData).to.be.an(\"object\");\r",
+							"    pm.expect(jsonData.id).to.be.a(\"number\");\r",
+							"    pm.expect(jsonData.name).to.be.a(\"string\");\r",
+							"    pm.expect(jsonData.location).to.be.a(\"string\");\r",
+							"    pm.expect(jsonData.phone).to.be.a(\"string\");\r",
+							"    pm.expect(jsonData.courses).to.be.an(\"array\");\r",
+							"    \r",
+							"});\r",
+							"// Test array content body\r",
+							"pm.test(\"Test array properties\",()=>{\r",
+							"    pm.expect(jsonData.courses).to.include(\"java\");\r",
+							"    pm.expect(jsonData.courses).to.have.members([\"java\",\"Selenium\"]);\r",
+							"})\r",
+							"// Testing individual data of response field\r",
+							"pm.test(\"Value of fields in response\",()=>{\r",
+							"    var jsondata = pm.response.json();\r",
+							"    pm.expect(jsondata.id).to.eql(1);\r",
+							"    pm.expect(jsondata.name).to.eql(\"priti\");\r",
+							"    pm.expect(jsondata.location).to.eql(\"Dhaka\");\r",
+							"    pm.expect(jsondata.phone).to.eql(\"0129454\");\r",
+							"    pm.expect(jsondata.courses[0]).to.eql(\"java\");\r",
+							"})\r",
+							"// Schema Varify\r",
+							"var schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"id\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"location\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"phone\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"courses\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": [\r",
+							"        {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"id\",\r",
+							"    \"name\",\r",
+							"    \"location\",\r",
+							"    \"phone\",\r",
+							"    \"courses\"\r",
+							"  ]\r",
+							"};\r",
+							"pm.test(\"Schema is valid\",function(){\r",
+							"    pm.expect(tv4.validate(jsonData,schema)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/students/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new student info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// These all are Testing Status code\r",
+							"pm.test(\"Status code is 201\",()=>{\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\",()=>{\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201|| 201]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Aman\",\r\n    \"location\":\"Noakhali\",\r\n    \"phone\":\"9802340\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a student info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// These all are Testing Status code\r",
+							"pm.test(\"Status code is 200\",()=>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\",()=>{\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200 || 201]);\r",
+							"});\r",
+							"// These all are Testing Header items\r",
+							"pm.test(\"Content-Type Header is present\",()=>{\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length is present\",()=>{\r",
+							"    pm.response.to.have.header(\"Content-Length\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Ayat\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/students/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete single student info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// These all are Testing Status code\r",
+							"pm.test(\"Status code is 200\",()=>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\",()=>{\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200 || 201]);\r",
+							"});\r",
+							"// These all are Testing Header items\r",
+							"pm.test(\"Content-Type Header is present\",()=>{\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length is present\",()=>{\r",
+							"    pm.response.to.have.header(\"Content-Length\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/students/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

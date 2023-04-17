@@ -1,0 +1,37 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "priti",
+      "location": "Dhaka",
+      "phone": "0129454",
+      "courses": [
+        "java",
+        "Selenium"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Tasnim",
+      "location": "Rajshahi",
+      "phone": "023423",
+      "courses": [
+        "python",
+        "appium"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Ruble",
+      "location": "Lakshmipur",
+      "phone": "0543534",
+      "courses": [
+        "C#",
+        "RestAPI"
+      ]
+    },
+    {
+      "id": 4
+    }
+  ]
+}
