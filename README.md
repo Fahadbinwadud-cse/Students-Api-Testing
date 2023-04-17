@@ -35,8 +35,8 @@ Updating Update student data using put method with id. Here is image below:
 
 
 
-## Delete Author Detail
-Deleting Author Detail using delete method with id. Here is image below:
+## Delete student Detail
+Deleting student Detail using delete method with id. Here is image below:
 
 ![Postman_5JIzK89RkY](https://user-images.githubusercontent.com/61489509/232439519-bece9714-e09d-4a83-a986-9d3219355623.png)
 
